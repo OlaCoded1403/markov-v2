@@ -9,14 +9,15 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
 - [ ] Submitted the [Airtable form](https://airtable.com/appoDAKpC74UOqoDa/shrASgVC645QpqFiQ)
 - [x] **≥10 blobs written on Mainnet** — agent ID + blob count in the DeepSurge form
   - Agent ID (Walrus Memory account): `0x6b5a3d090d63ad7390c47c453f5eebdb0ae62b3c0035c379ad7d51d6eadb888a`
-  - Blob count: **181**, swept namespace by namespace on 2026-08-20T13:45Z, every one confirmed
-    written (not merely accepted):
+  - Blob count: **183**, swept namespace by namespace on 2026-08-20T13:45Z and incremented for the
+    two writes made since, every one confirmed written (not merely accepted):
     - 160 from the experiment — 40 in the `mk.exp.*` pilot, 120 in the corrected `mk.exp2.*` run.
       Unchanged since 2026-08-19; the experiment side is finished and must not be padded.
-    - 21 from real use of Markov v2 itself, counted by recalling each namespace at `limit: 100`:
-      `markov.index` 1, `markov.state.markov-v2` 5, `markov.facts.markov-v2` 6,
-      `markov.facts.global` 9, `markov.capsules` 0. Written and recalled back successfully, so the
-      end-to-end check in `docs/SETUP.md` §3 is satisfied.
+    - 23 from real use of Markov v2 itself. Swept at `limit: 100` per namespace: `markov.index` 1,
+      `markov.state.markov-v2` 5, `markov.facts.markov-v2` 6, `markov.facts.global` 9,
+      `markov.capsules` 0 — then +2 for the handoff at the end of that session (one project fact
+      recording the published repo URL, one checkpoint). Written and recalled back successfully, so
+      the end-to-end check in `docs/SETUP.md` §3 is satisfied.
     - The `markov.state.markov-v2` figure is 5 blobs but only **4 distinct checkpoints** — the
       `2026-08-20T12:09:00Z` checkpoint exists twice, written once and then written again by a
       later session that did not check for it. Recall collapses the pair in its output but both
@@ -35,9 +36,11 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
       address `0x9a2059af…7d1e86d0`, which is just the MCP client's key.)*
 - [x] Signed in 2026-08-19T14:34Z; credentials at `~/.memwal/credentials.json` (contains the raw
       delegate private key — treat as a secret, never commit or paste it)
-- [ ] **Repo pushed and public** — `https://github.com/OlaCoded1403/markov-v2`. Nothing is pushed
-      yet; the local repo has no remote. The blog links to it, judges need it to check the harness,
-      and `blog/OBSERVATIONS.md` is gitignored so private session notes stay out.
+- [x] **Repo pushed and public** — https://github.com/OlaCoded1403/markov-v2 (pushed 2026-08-20,
+      commit `f86df43`). 28 files tracked; `blog/OBSERVATIONS.md`, `.claude/settings.local.json`
+      and `node_modules/` are gitignored, so the private session notes stayed out. The two
+      `inspect-credentials.mjs` scripts print field names with values redacted — checked before
+      pushing. This URL is what `blog/DRAFT.md` links to.
 - [ ] Full copy-pasteable prompt text in the form (from `PROMPT.md`, below the `---`)
 - [ ] 2–5 sentence explanation: problem solved + how it uses Walrus Memory (draft below)
 - [ ] Blog/article published — link: `________`
