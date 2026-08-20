@@ -1,9 +1,7 @@
-# The best AI memory prompt I've used has a bug that gets worse every time you use it
-
-> **Draft — complete.** Every claim is evidenced: measurements from `experiment/`, transcripts from
-> real sessions, blob ids anyone can open. Do not add invented specifics; "did you actually use it"
-> is a scored criterion and generic examples are the tell.
-
+---
+title: "The best AI memory prompt I've used has a bug that gets worse every time you use it"
+description: "Markov boots by recalling three checkpoints and taking the newest. Semantic search has no idea which one that is. Measured on Walrus Mainnet."
+permalink: /
 ---
 
 ## Nothing looked wrong

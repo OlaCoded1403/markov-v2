@@ -27,7 +27,7 @@ evolution"). Read `markov.state.markov-v2` for the checkpoint and `markov.facts.
 | `docs/WHY.md` | Every change, cited against a specific numbered rule of the original. |
 | `docs/SETUP.md` | Mainnet setup walkthrough, zero to writing blobs. ~30 min. |
 | `experiment/` | Node harness that measures the defect on mainnet. The only code. Its own `README.md` is the deepest account of the method and the caveats that must survive into the write-ups. |
-| `blog/DRAFT.md` | The article. Contains 🔴 markers for evidence only the user can supply. |
+| `blog/index.md` | **The article**, published at the GitHub Pages site root via its own `permalink: /`. Renamed from `DRAFT.md` when it went live. |
 | `blog/OBSERVATIONS.md` | The user's scratch capture sheet for real-session evidence. Not published. Never invent entries here — each section maps to a 🔴 marker in `DRAFT.md`. |
 | `submission/checklist.md` | Hard gates, wallet/agent IDs, form drafts. The source of truth for submission status. |
 | `submission/memwal-feedback.md` | Drafted GitHub issues for MystenLabs/MemWal (doubles as a Bug Bounty entry). |
@@ -52,7 +52,7 @@ Markov v2's fix: read the whole set (`limit: 100`), sort client-side by parsed I
 bound each namespace per project (`markov.state.<slug>`, with `markov.index` as a registry because
 flat exact-match namespaces cannot be enumerated), and report truncation when the count hits the
 limit. Repeat this framing consistently — every document restates it, so a change to the argument
-must land in `README.md`, `docs/WHY.md`, `blog/DRAFT.md`, and the form draft in
+must land in `README.md`, `docs/WHY.md`, `blog/index.md`, and the form draft in
 `submission/checklist.md` together.
 
 ## Conventions
@@ -108,8 +108,12 @@ The same seven are wired as npm scripts (`npm run stage`, `npm run analyse`, …
   exposing the value.
 - **Mainnet only** — relayer `https://relayer.memory.walrus.xyz`. Anything `relayer-staging…` is
   testnet and disqualifies the work.
-- **`blog/DRAFT.md` 🔴 markers are for the user's real usage, not for you to fill in.** "Did you
-  actually use it" is a scored criterion, and invented specifics are the tell.
+- **Never write a first-person claim into `blog/index.md` that isn't in the record.** "Did you
+  actually use it" is a scored criterion and invented specifics are the tell. The article once
+  carried 🔴 markers for evidence only the user could supply; the opening anecdote was never going
+  to arrive, so the piece was restructured to open on the measurement instead. That is the pattern
+  to repeat — find evidence that exists, or change the shape of the argument. Do not invent, and do
+  not leave a hole either.
 - **`PROMPT.md` has two generated copies: `CLAUDE.md` below its `---`, and `AGENTS.md`** (the latter
   because Antigravity CLI and Codex load rules from `AGENTS.md` and cannot be pointed at an
   arbitrary path). So this project runs under the prompt it ships, in either client. `PROMPT.md` is

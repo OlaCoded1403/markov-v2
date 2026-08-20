@@ -64,7 +64,7 @@ fallback.
 ## Run under itself
 
 This repository was built by an agent running this prompt, with its own state in Walrus Memory —
-181 blobs on Sui Mainnet at the time of writing. Two of the rules here exist because that turned up
+185 blobs on Sui Mainnet at the time of writing. Two of the rules here exist because that turned up
 failures no amount of re-reading would have: rule 1.5 (the MCP surface reports `score`, not
 `distance`, so every documented threshold inverts) and rule 3.5 (the resume summary got silently
 skipped when a session opened with a slash command — retrieval worked, the report to the human
@@ -84,7 +84,7 @@ working across a tool boundary. [`docs/SETUP.md` §7](docs/SETUP.md) reproduces 
 | [`docs/WHY.md`](docs/WHY.md) | Every change, cited against a specific rule of the original. |
 | [`docs/SETUP.md`](docs/SETUP.md) | Mainnet setup, from zero to writing blobs. ~30 min. |
 | [`experiment/`](experiment/) | The recency harness. |
-| [`blog/DRAFT.md`](blog/DRAFT.md) | The article. |
+| [`blog/index.md`](blog/index.md) | The article. |
 | [`submission/`](submission/) | Rule gates and MemWal feedback issues. |
 | [`archive/buildmem/`](archive/buildmem/) | An earlier, abandoned evolution of a different base prompt. |
 

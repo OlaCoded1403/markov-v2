@@ -52,7 +52,7 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
       commit `f86df43`). 28 files tracked; `blog/OBSERVATIONS.md`, `.claude/settings.local.json`
       and `node_modules/` are gitignored, so the private session notes stayed out. The two
       `inspect-credentials.mjs` scripts print field names with values redacted — checked before
-      pushing. This URL is what `blog/DRAFT.md` links to.
+      pushing. This URL is what `blog/index.md` links to.
 - [ ] Full copy-pasteable prompt text in the form (from `PROMPT.md`, below the `---`)
 - [ ] 2–5 sentence explanation: problem solved + how it uses Walrus Memory (draft below)
 - [ ] Blog/article published — link: `________`
@@ -143,5 +143,5 @@ browser rendered, a blob id shows what the network stored. Explorer:
 
 ## Article outline
 
-See `blog/DRAFT.md`. Judged on: is it useful to someone who has never used this prompt, could they
+See `blog/index.md`. Judged on: is it useful to someone who has never used this prompt, could they
 follow it, does it make them want to try it. Lead with the failure, not the architecture.

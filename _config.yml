@@ -1,0 +1,14 @@
+title: Markov v2
+description: An evolution of the Markov memory prompt for the Walrus Memory Prompt Evolution session.
+theme: jekyll-theme-primer
+
+# The article is blog/index.md, served at the site root via its own permalink.
+# Everything below is either the deliverable itself or supporting material, and is
+# browsable at its own path.
+exclude:
+  - archive/          # an abandoned evolution of a different base prompt — not part of this entry
+  - experiment/node_modules/
+  - experiment/package-lock.json
+  - blog/OBSERVATIONS.md   # private session notes; also gitignored, belt and braces
+  - CLAUDE.md
+  - AGENTS.md
