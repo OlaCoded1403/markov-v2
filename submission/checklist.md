@@ -71,9 +71,34 @@ which is gitignored and stays private.
 |---|---|
 | The defect is measured, not argued | 120 blobs, 3 rounds, ranks 13/20 · 26/40 · 50/60; Spearman rho −0.32 → −0.16 → −0.03; no significant recency signal in 17 of 18 cells. `experiment/`, `node analyse.mjs`. |
 | The prompt works across tools | Checkpoint `2026-08-20T13:32:00Z` written from Claude Code, resumed 4 minutes later in Antigravity CLI (`agy` 1.1.16) off the one-word prompt "where". It named the checkpoint and, asked how it chose, described exhaustive recall at `limit: 100` + ISO 8601 parse + chronological sort. |
-| It was really used | 21 blobs in `markov.*` across two days of actual work, including this checklist and the article. Two prompt rules (1.5, 3.5) exist *because* of failures observed while using it. |
+| It was really used | 23 blobs in `markov.*` across two days of actual work, including this checklist and the article. Two prompt rules (1.5, 3.5) exist *because* of failures observed while using it. |
 | Honest about its own failures | Rule 3.5 was silently skipped under a slash-command opener, and a duplicate checkpoint blob got written past the write gate. Both are documented rather than tidied away. |
 | Mainnet | Relayer `https://relayer.memory.walrus.xyz`, relayer 0.1.0, API 1.0.0, build `2162d261`. |
+
+### Blob receipts — publicly verifiable, no screenshot required
+
+Every write returns a blob id. These are on Walrus Mainnet and anyone can open them without
+credentials, which is stronger evidence than a dashboard screenshot: a screenshot shows what my
+browser rendered, a blob id shows what the network stored. Explorer:
+`https://walruscan.com/mainnet/blob/<id>`
+
+| Namespace | What it is | Blob id |
+|---|---|---|
+| `markov.state.markov-v2` | Checkpoint `2026-08-20T13:32:00Z` — the one Antigravity resumed from | `38GpPskxLyqPFmX7eNQNVlYiEXznGgmPTKn85laLbbc` |
+| `markov.state.markov-v2` | Checkpoint `2026-08-20T14:08:00Z` — supersedes the above | `XGwmfgyuvpbQrVyj31qeH43aL6HI-qpw1iUX_USWwWU` |
+| `markov.facts.global` | The `score`-vs-`distance` finding, confirmed across two clients | `ibKPNyHaliUzfZLNtQMwytsZDhq0nwrblf8ogfJCUZk` |
+| `markov.facts.global` | Antigravity headless MCP permission syntax | `h-_5GBhlOEZWjBG9OtfZhHMCP3_rdlc7iSPAGMpDRFI` |
+| `markov.facts.global` | How `agy` discovers `AGENTS.md` / `GEMINI.md` | `e8jMpzqeZmNhM2d_VRJntH2_qnu24OHowTOJcLR6D-8` |
+| `markov.facts.markov-v2` | Why `AGENTS.md` exists, reversing an earlier decision | `UXdpWg1TTNWHOvzBoBycHkwS1oZOGt2OxjvnQNOWNDQ` |
+| `markov.facts.markov-v2` | The published repo URL | `0uhPtAsotru6BrVP3Cxiwa1VcnL6MQ_-Homo5jQn0A4` |
+
+> **The dashboard at [memory.walrus.xyz](https://memory.walrus.xyz) shows no blobs for this
+> account, and that is expected rather than alarming.** Every Markov v2 write goes to an explicit
+> namespace and Walrus Memory cannot enumerate namespaces — the same gap that forces rule 2.1 to
+> maintain `markov.index` by hand, filed as issue 3 in `memwal-feedback.md`. A dashboard inherits
+> the handicap: with nothing to enumerate it can only show the default namespace, which Markov v2
+> deliberately never writes to. The blob count above comes from recalling each known namespace at
+> `limit: 100` and summing, which is the only method the platform actually supports.
 
 ## Two extra prize levers
 
