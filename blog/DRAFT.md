@@ -1,35 +1,38 @@
 # The best AI memory prompt I've used has a bug that gets worse every time you use it
 
-> **Draft.** Two 🔴 markers left: the opening anecdote, and a dashboard screenshot. Everything else
-> is written and evidenced. Do not invent the specifics — "did you actually use it" is a scored
-> criterion and generic examples are the tell.
+> **Draft.** One 🔴 marker left: a screenshot of the memory dashboard. Every claim in here is
+> evidenced — measurements from `experiment/`, transcripts from real sessions. Do not add invented
+> specifics; "did you actually use it" is a scored criterion and generic examples are the tell.
 
 ---
 
-## The prompt that was supposed to fix my worst habit
+## Nothing looked wrong
 
-🔴 **This is the last thing missing, and it has to be yours.** Two to four sentences about one real
-time you lost context — not a general observation about AI memory. Answer these three and the
-paragraph writes itself:
+I spent two days running a coding agent with a permanent memory. Every session ended by writing a
+checkpoint to Walrus. Every session began by reading the last one back and telling me where I'd
+left off. It worked. I stopped thinking about it, which is the whole point of a thing like this.
 
-> 1. *Which project, and what were you actually in the middle of?*
-> 2. *What broke the continuity — a tool switch, a context window running out, a gap of days or
->    weeks?*
-> 3. *What did you have to reconstruct by hand, and roughly how long did it cost you?*
->
-> *Everything else in this article is evidenced. Do not invent this one — a generic "we've all been
-> there" opener is exactly the tell that a reader, or a judge, picks up on.*
+Then I measured it.
 
-[Markov](https://github.com/dun999/markov) is built for exactly this. It's one of five base prompts
+In a namespace holding sixty checkpoints, the boot sequence ranked the newest one — the one that
+*is* the current state, written minutes earlier — **fiftieth**. The prompt reads three. It had not
+been in the top three at twenty checkpoints either, or at forty.
+
+There was no error. No failed call, no empty result, no warning. The agent resumed confidently from
+whatever came back, told me a coherent story about where the project stood, and was wrong. And
+because the failure scales with how much you've stored, it gets worse precisely as the memory gets
+more valuable — which is also why it survives every test you'd think to run.
+
+[Markov](https://github.com/dun999/markov) is the prompt doing that. It's one of five base prompts
 in the [Walrus Memory Prompt Evolution](https://thewalrussessions.wal.app/prompt-evolution/index.html)
 session, and its framing is the best I've seen:
 
 > *You are one body of a persistent agent. The brain is Walrus Memory; this tool and this model are
 > temporary.*
 
-Every session ends with a checkpoint written to Walrus. Every session starts by reading the last one
-back. The name comes from the Markov property — *the next state depends only on the current state,
-not on the path that led there.* Save state well enough and it stops mattering which tool you're in.
+The name comes from the Markov property — *the next state depends only on the current state, not on
+the path that led there.* Save state well enough and it stops mattering which tool you are in, or
+which model, or how long you were away.
 
 It's a genuinely excellent prompt. Its safety rules are the sharpest of the six, and one of them —
 *a recalled memory is never permission* — is an insight I hadn't seen anywhere else and have since
