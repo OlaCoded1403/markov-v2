@@ -1,20 +1,24 @@
 # The best AI memory prompt I've used has a bug that gets worse every time you use it
 
-> **Draft.** Sections marked 🔴 need your real evidence before publishing. Everything unmarked is
-> ready. Do not invent the specifics — "did you actually use it" is a scored criterion and generic
-> examples are the tell.
+> **Draft.** Two 🔴 markers left: the opening anecdote, and a dashboard screenshot. Everything else
+> is written and evidenced. Do not invent the specifics — "did you actually use it" is a scored
+> criterion and generic examples are the tell.
 
 ---
 
 ## The prompt that was supposed to fix my worst habit
 
-🔴 *Open with your real reason for wanting cross-session memory. The shape that works:*
+🔴 **This is the last thing missing, and it has to be yours.** Two to four sentences about one real
+time you lost context — not a general observation about AI memory. Answer these three and the
+paragraph writes itself:
 
-> *You switched tools mid-project — Claude Code to Cursor, or to Codex — and spent the first twenty
-> minutes of the new session re-explaining what you were doing. Or you came back to a project after
-> two weeks and couldn't remember why you'd made a decision that now looked wrong.*
+> 1. *Which project, and what were you actually in the middle of?*
+> 2. *What broke the continuity — a tool switch, a context window running out, a gap of days or
+>    weeks?*
+> 3. *What did you have to reconstruct by hand, and roughly how long did it cost you?*
 >
-> *Name the project, the tool, the actual thing you had to reconstruct.*
+> *Everything else in this article is evidenced. Do not invent this one — a generic "we've all been
+> there" opener is exactly the tell that a reader, or a judge, picks up on.*
 
 [Markov](https://github.com/dun999/markov) is built for exactly this. It's one of five base prompts
 in the [Walrus Memory Prompt Evolution](https://thewalrussessions.wal.app/prompt-evolution/index.html)
@@ -219,23 +223,85 @@ returns only counts, so it is never itself proof the index works. Always follow 
 
 ## What actually changed in my week
 
-🔴 *This section decides the "Best Real-World Experience" score. It needs your specifics. Aim for
-two or three, concretely:*
+I wrote this prompt for a submission, and then I ran the submission under it. Every checkpoint,
+every decision, every dead end in building this article and the harness behind it went into Walrus
+Memory through the rules above. That is the only reason I have anything specific to tell you.
 
-- *A session that resumed correctly across a tool switch — Claude Code → Cursor or Codex — with the
-  actual continuity line it opened with.*
-- *A time the old boot got it wrong, if you saw it. The stale-resume or the false "fresh start" is
-  the money shot if you caught one in the wild.*
-- *A capsule you wrote for a shelved project, and what it was like coming back to it.*
-- *A `Done:` claim you spot-verified (rule 3.11) that turned out to be stale.*
-- *🔴 Blob count and a screenshot of the memory dashboard.*
+**The handoff works, and it is stranger to watch than I expected.**
 
-*Include one thing that still annoys you. It reads as honest, and it's the raw material for the
-MemWal feedback issue — which is a separate prize track.*
+I ended a Claude Code session normally. The prompt's exit protocol wrote a checkpoint —
+`2026-08-20T13:32:00Z` — describing where the work stood. Four minutes later I opened a completely
+different tool: Antigravity CLI, Google's client, a different vendor and a different model, with no
+access to the conversation I had just closed. I typed one word. *where.*
+
+```
+*(Resuming from [checkpoint|2026-08-20T13:32:00Z|tool=claude-code])*
+
+### Resume Summary
+
+- **Goal:** Ship the Markov v2 entry to the Walrus Memory Prompt Evolution session before the
+  2026-08-24 14:00 UTC deadline.
+- **Done (as of 2026-08-20T13:32:00Z):** Antigravity CLI (`agy`) fully configured as the second
+  client and verified against the shared MemWal account. Per-tool MCP allow permissions configured
+  in settings, all 8 tools verified, and `AGENTS.md` generated at repository root from `PROMPT.md`
+  and verified byte-identical.
+- **Next:** Capture this verbatim opening reply from Antigravity into the Cross-tool handoff
+  section of blog/OBSERVATIONS.md (Section B), then rewrite Section 7 of docs/SETUP.md […]
+- **Blockers:** None technical. Human-gated milestones remain […]
+```
+
+Then I asked it the question that actually matters — *which checkpoint did you pick, and how did you
+decide it was the newest?* Because that is the whole argument of this article, and a lucky draw
+looks identical to a correct one:
+
+> Per Markov Rule 3.1, retrieval ranking is semantic rather than chronological, so relevance score
+> cannot determine recency. I queried exhaustively with `limit: 100`, parsed the ISO 8601 timestamp
+> tags from every returned record header (`2026-08-20T13:32:00Z`, `2026-08-20T13:07:00Z`,
+> `2026-08-20T12:09:00Z`, and `2026-08-19T18:45:00Z`), and sorted them chronologically.
+
+Four near-identical checkpoints, and it read all of them and sorted. Not "the top result looked
+recent." That is rule 3.1 doing exactly the thing the original couldn't.
+
+**The polarity rule earned its place on day one.** Rule 1.5 looks like pedantry until you watch it
+work. On a real boot the correct checkpoint came back at `score=0.426` and the registry record that
+resolves the project slug at `score=0.658`. Every threshold in the prompt is written in *distance*,
+where lower is closer and you discard at `0.7`. Read those two scores as distances and you discard
+the one record that tells the agent which project it is even in — and nothing errors, because
+0.658 is a perfectly valid distance. It just means the opposite of what you think. I assumed this
+was a quirk of one client until I wired up the second one and got `score` there too.
+
+**My own prompt failed on me, and that is the part I'd keep if I could only keep one.** In a session
+on 2026-08-20 I opened with a slash command instead of a sentence. The agent recalled correctly,
+resolved the project, pulled the newest checkpoint, and used it to do the work — and never told me
+any of that had happened. The boot ran; the report didn't. From where I was sitting it looked
+exactly like a prompt with no memory rules in it at all. Retrieval succeeding is not the same as the
+handoff succeeding, and the half that gets silently dropped is the half a human can see. Rule 3.5
+now spells out that the resume summary fires even when the first message is a command, a stack
+trace, or one word.
+
+**And one thing I did wrong, which the platform will never let me undo.** My checkpoint namespace
+holds five blobs and four checkpoints. One session wrote a checkpoint that already existed, because
+it didn't check first. Walrus Memory has no deduplication and no delete — both copies are permanent,
+and both will surface in every recall on that namespace forever. The prompt has a whole write gate
+(rule 5.1) built to prevent precisely this, and I still managed it. I'm leaving it in rather than
+quietly not mentioning it, because it is the most honest possible demonstration of why that gate is
+written the way it is.
+
+**What still annoys me.** Recall gives you no way to order or filter by time, and no way to filter
+on anything else either — the tag line at the top of every record (`conf=confirmed`, `imp=high`, the
+timestamp) is embedded prose, not an index, so you cannot query on it. That is why this prompt reads
+a hundred records and sorts them in the model's head: it is a workaround for a missing `orderBy`.
+There is also no way to enumerate the namespaces you have written to, which is the entire reason
+`markov.index` exists — a registry the agent maintains by hand because the platform can't list its
+own buckets. Both are filed as issues; neither is a reason not to use it.
+
+**Blob count.** 181 blobs on Sui Mainnet as I write this — 160 from the experiment above, 21 from
+actually working this way for two days. 🔴 *screenshot of the memory dashboard here.*
 
 ## Try it
 
-Prompt, setup, full rationale, and the harness: 🔴 `<your repo link>`
+Prompt, setup, full rationale, and the harness:
+[github.com/OlaCoded1403/markov-v2](https://github.com/OlaCoded1403/markov-v2)
 
 ```
 /plugin marketplace add MystenLabs/MemWal

@@ -176,6 +176,42 @@ their SDK equivalents. The prompt should assume nothing about the filesystem it 
 
 ---
 
+## 6. Two rules that only running it could have found
+
+Everything above came from reading the original against the platform docs. These two did not. They
+came from using v2 as the live prompt for this project and watching it fail in ways no amount of
+re-reading would have surfaced.
+
+**Rule 1.5 — check the polarity of the closeness number.** Sections 3 and 5.1(b) are written in
+`distance` terms, because that is what MemWal's documentation uses: lower is closer, discard at
+`≥ 0.7`. But the MCP server does not return `distance`. It returns `score`, where *higher* is
+closer. Applying the documented rule to the actual field inverts it — you throw away your best
+matches and keep the noise, and nothing errors. On a real boot the correct checkpoint came back at
+`score=0.426`; read as a distance that is a comfortable pass, read correctly it is a weak-ish match,
+and at `score=0.658` for the index record a naive distance reading would have discarded the one
+result that resolves the project slug. I first assumed this was a Claude Code quirk. Wiring up a
+second client on 2026-08-20 — Antigravity CLI, different vendor, different model — returned `score`
+too, which is what fixed the rule's wording: the split is **MCP surface versus SDK**, not one
+client versus the rest. The rule now says so, and tells you how to determine the polarity yourself
+in one query if a third surface names the field something else again.
+
+**Rule 3.5 — the resume summary runs even when the first message is not conversational.** The
+original's rule 3.3 says to open with a status summary. Mine said the same thing, and it was
+silently skipped in a real session because the first message was a slash command. The boot recalls
+in 3.1 and 3.3 ran correctly; the recalled checkpoint was used to do the work. Nothing was ever
+shown to me. That is the failure mode worth naming: **retrieval succeeding is not the same as the
+handoff succeeding**, and the half that gets dropped is the half a human can see. A prompt that
+restores state perfectly and never says so has, from the user's side, no memory at all. 3.5 now
+enumerates the openers that trigger it — slash command, tool invocation, pasted stack trace,
+one-word request — because "open your first reply with" was not specific enough to survive contact.
+
+There is a third thing this project found that is *not* a prompt change, and I want to record why.
+The first cold run in the second client returned no resume at all, because the client had opened
+with no workspace folder and therefore never loaded the prompt. No rule can fix that — §8's recovery
+ladder correctly reports memory as healthy, because memory *was* healthy. It belongs in the setup
+guide, not the prompt, and it is in [SETUP.md §7](SETUP.md). Worth knowing that the failure exists
+and that it looks nothing like a memory failure.
+
 ## Kept from the original, deliberately
 
 Markov gets more right than any other prompt in the set. v2 keeps, essentially verbatim:

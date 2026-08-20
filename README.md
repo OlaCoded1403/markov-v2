@@ -61,9 +61,26 @@ Plus: full ISO 8601 timestamps (the original's bare dates make same-day checkpoi
 an empty one), documented distance thresholds, per-project fact namespaces, and no repo-coupled CLI
 fallback.
 
+## Run under itself
+
+This repository was built by an agent running this prompt, with its own state in Walrus Memory —
+181 blobs on Sui Mainnet at the time of writing. Two of the rules here exist because that turned up
+failures no amount of re-reading would have: rule 1.5 (the MCP surface reports `score`, not
+`distance`, so every documented threshold inverts) and rule 3.5 (the resume summary got silently
+skipped when a session opened with a slash command — retrieval worked, the report to the human
+didn't).
+
+The cross-tool claim is tested rather than asserted. A checkpoint written from Claude Code was
+resumed four minutes later in Antigravity CLI — different vendor, different model, no access to the
+conversation — off a one-word prompt, and when asked how it chose among four near-identical
+checkpoints it answered: *"I queried exhaustively with `limit: 100`, parsed the ISO 8601 timestamp
+tags from every returned record header […] and sorted them chronologically."* That is rule 3.1
+working across a tool boundary. [`docs/SETUP.md` §7](docs/SETUP.md) reproduces it.
+
 | File | What it is |
 |---|---|
 | [`PROMPT.md`](PROMPT.md) | **The deliverable.** Copy-pasteable, keeps the original's numbered-rule format. |
+| [`AGENTS.md`](AGENTS.md) / [`CLAUDE.md`](CLAUDE.md) | Generated copies of `PROMPT.md`, so this repo runs under the prompt it ships. `PROMPT.md` is the source of truth. |
 | [`docs/WHY.md`](docs/WHY.md) | Every change, cited against a specific rule of the original. |
 | [`docs/SETUP.md`](docs/SETUP.md) | Mainnet setup, from zero to writing blobs. ~30 min. |
 | [`experiment/`](experiment/) | The recency harness. |

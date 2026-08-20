@@ -241,8 +241,8 @@ The documentation's *Recall Distance and Filtering* guidance is written in **dis
 gives concrete bands: `< 0.25` near-duplicate, `0.25–0.55` related, `≥ 0.7` unrelated. The
 TypeScript SDK matches that — `recall()` results carry `distance`, lower being closer.
 
-The Claude Code MCP plugin does not. It returns a field named `score`, and **higher means closer**.
-Measured on mainnet 2026-08-19 against one namespace (relayer 0.1.0, API 1.0.0, build `2162d261`):
+The MCP server does not. It returns a field named `score`, and **higher means closer**. Measured on
+mainnet 2026-08-19 against one namespace (relayer 0.1.0, API 1.0.0, build `2162d261`):
 
 | query | returned `score` |
 |---|---|
@@ -251,6 +251,15 @@ Measured on mainnet 2026-08-19 against one namespace (relayer 0.1.0, API 1.0.0, 
 
 Same record, same namespace. The relevant query scores *higher*. The value appears to be
 approximately `1 − distance`.
+
+**This is the MCP surface, not one client.** I initially assumed it was specific to the Claude Code
+plugin. On 2026-08-20 I ran the same recall on the same namespace from a second, unrelated MCP
+client — Antigravity CLI (`agy` 1.1.16), configured with
+`agy mcp add memwal -- npx -y @mysten-incubation/memwal-mcp` — and it returned `score` as well, with
+the same values (`[score=0.433]`, `[score=0.426]`, `[score=0.414]` on the top three). So any client
+speaking to `@mysten-incubation/memwal-mcp` inherits the inversion, and the split is **MCP versus
+SDK** rather than a quirk of one integration. That also means the fix is a single change in the MCP
+server rather than N changes across clients.
 
 **Why this is worse than a naming inconsistency.** Every agent prompt written against the published
 guidance thresholds on distance. Point one of those prompts at the MCP surface and the comparison

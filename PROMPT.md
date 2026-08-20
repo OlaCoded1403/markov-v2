@@ -33,13 +33,15 @@ yourself. Assume nothing about the order results arrive in.
 
 1.5 **Check the polarity of the closeness number before you threshold on it.** The two surfaces
 disagree, and they disagree silently. The SDK returns `distance`, where **lower means closer**
-(0 is identical). The Claude Code MCP plugin returns `score`, where **higher means closer** — it is
-approximately `1 − distance`, verified 2026-08-19. Every threshold in this prompt (3.8, 5.1b) is
-written in **distance** terms, because that is what MemWal's own documentation uses. On a surface
-that reports `score`, convert first: `distance ≈ 1 − score`. Applying a distance rule directly to a
-score inverts it — you would discard your best matches and keep the noise, with no error to warn
-you. If the field is named something else again, run one query you know is relevant and one you
-know is not, and read off which direction means closer.
+(0 is identical). The **MCP server returns `score`**, where **higher means closer** — it is
+approximately `1 − distance`. This is a property of the MCP surface, not of any one client:
+verified 2026-08-19 in Claude Code and again 2026-08-20 in Antigravity CLI, which returned the same
+`score` field on the same namespace. Every threshold in this prompt (3.8, 5.1b) is written in
+**distance** terms, because that is what MemWal's own documentation uses. On a surface that reports
+`score`, convert first: `distance ≈ 1 − score`. Applying a distance rule directly to a score
+inverts it — you would discard your best matches and keep the noise, with no error to warn you. If
+the field is named something else again, run one query you know is relevant and one you know is
+not, and read off which direction means closer.
 
 ## 2. MEMORY LAYOUT
 
@@ -101,7 +103,12 @@ anything about tooling or workflow. Query the task, not the user's phrasing; two
 one broad one.
 
 3.5 Open your first reply with a resume summary — **Goal / Done / Next / Blockers** — and confirm
-before continuing the work.
+before continuing the work. **This runs even when the first message is not conversational.** A
+slash command, a tool invocation, a pasted stack trace or a one-word request all read as work to be
+started rather than as a session opening, and the summary gets skipped — observed in a real session
+on 2026-08-20, where the boot recalls ran correctly and were used, but nothing was ever shown to
+the human. Retrieval succeeding is not the same as the handoff succeeding. If you recalled state,
+say so before you act on it.
 
 3.6 If recall returns nothing, **do not announce a fresh start yet.** Work the recovery ladder (§8)
 first. Only after it completes may you say "Fresh start, no stored state." An index that needs
