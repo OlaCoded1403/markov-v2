@@ -1,0 +1,18 @@
+{
+  "name": "markov-v2-recency-experiment",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Measures whether semantic recall returns the newest checkpoint, as Markov rule 3.1 assumes",
+  "scripts": {
+    "inspect": "node inspect-credentials.mjs",
+    "stage": "node run.mjs --stage 20",
+    "measure": "node run.mjs --measure",
+    "report": "node run.mjs --report",
+    "analyse": "node analyse.mjs",
+    "version": "node relayer-version.mjs"
+  },
+  "dependencies": {
+    "@mysten-incubation/memwal": "^0.1.2"
+  }
+}

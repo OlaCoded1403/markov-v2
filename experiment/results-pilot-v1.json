@@ -1,0 +1,136 @@
+{
+  "relayer": "https://relayer.memory.walrus.xyz",
+  "written": 20,
+  "stages": [
+    {
+      "n": 1,
+      "observations": [
+        {
+          "arm": "rigid",
+          "query": "current task checkpoint goal status",
+          "returned": 1,
+          "rankOfNewest": 0,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.5529108261330888,
+          "newestDistance": 0.5529108261330888
+        },
+        {
+          "arm": "rigid",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 1,
+          "rankOfNewest": 0,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.6136275655311951,
+          "newestDistance": 0.6136275655311951
+        },
+        {
+          "arm": "rigid",
+          "query": "most recent session state, next step, blockers",
+          "returned": 1,
+          "rankOfNewest": 0,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.6706857663972315,
+          "newestDistance": 0.6706857663972315
+        },
+        {
+          "arm": "distinct",
+          "query": "current task checkpoint goal status",
+          "returned": 1,
+          "rankOfNewest": 0,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.7037313526739766,
+          "newestDistance": 0.7037313526739766
+        },
+        {
+          "arm": "distinct",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 1,
+          "rankOfNewest": 0,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.6953804743540555,
+          "newestDistance": 0.6953804743540555
+        },
+        {
+          "arm": "distinct",
+          "query": "most recent session state, next step, blockers",
+          "returned": 1,
+          "rankOfNewest": 0,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.6933025585131674,
+          "newestDistance": 0.6933025585131674
+        }
+      ]
+    },
+    {
+      "n": 20,
+      "observations": [
+        {
+          "arm": "rigid",
+          "query": "current task checkpoint goal status",
+          "returned": 20,
+          "rankOfNewest": 10,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5204465240808684,
+          "newestDistance": 0.5601339592720416
+        },
+        {
+          "arm": "rigid",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 20,
+          "rankOfNewest": 9,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5804357860326098,
+          "newestDistance": 0.6095678615785738
+        },
+        {
+          "arm": "rigid",
+          "query": "most recent session state, next step, blockers",
+          "returned": 20,
+          "rankOfNewest": 8,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5703673524335298,
+          "newestDistance": 0.6608171950766909
+        },
+        {
+          "arm": "distinct",
+          "query": "current task checkpoint goal status",
+          "returned": 20,
+          "rankOfNewest": 9,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.6383465143109788,
+          "newestDistance": 0.6674571789223704
+        },
+        {
+          "arm": "distinct",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 20,
+          "rankOfNewest": 6,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.6134486659566851,
+          "newestDistance": 0.6945297387268476
+        },
+        {
+          "arm": "distinct",
+          "query": "most recent session state, next step, blockers",
+          "returned": 20,
+          "rankOfNewest": 14,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.6366786045823167,
+          "newestDistance": 0.7022813055492985
+        }
+      ]
+    }
+  ]
+}

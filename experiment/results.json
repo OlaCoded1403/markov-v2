@@ -1,0 +1,237 @@
+{
+  "relayer": "https://relayer.memory.walrus.xyz",
+  "written": 60,
+  "stages": [
+    {
+      "n": 20,
+      "observations": [
+        {
+          "arm": "rigid",
+          "query": "current task checkpoint goal status",
+          "returned": 20,
+          "rankOfNewest": 13,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.4780734564471689,
+          "newestDistance": 0.550154590675924,
+          "recencyRankCorrelation": -0.3203007518796992,
+          "matched": 20
+        },
+        {
+          "arm": "rigid",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 20,
+          "rankOfNewest": 7,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5222657010784763,
+          "newestDistance": 0.5797064299845724,
+          "recencyRankCorrelation": -0.3563909774436089,
+          "matched": 20
+        },
+        {
+          "arm": "rigid",
+          "query": "most recent session state, next step, blockers",
+          "returned": 20,
+          "rankOfNewest": 2,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.5756418119991689,
+          "newestDistance": 0.6071017760342203,
+          "recencyRankCorrelation": -0.34736842105263155,
+          "matched": 20
+        },
+        {
+          "arm": "distinct",
+          "query": "current task checkpoint goal status",
+          "returned": 20,
+          "rankOfNewest": 0,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.5596585006711442,
+          "newestDistance": 0.5596585006711442,
+          "recencyRankCorrelation": -0.23308270676691722,
+          "matched": 20
+        },
+        {
+          "arm": "distinct",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 20,
+          "rankOfNewest": 4,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5698843996973638,
+          "newestDistance": 0.6164729773593611,
+          "recencyRankCorrelation": -0.33834586466165417,
+          "matched": 20
+        },
+        {
+          "arm": "distinct",
+          "query": "most recent session state, next step, blockers",
+          "returned": 20,
+          "rankOfNewest": 2,
+          "foundWithinMarkovLimit": true,
+          "foundAtAll": true,
+          "topDistance": 0.5672614281086673,
+          "newestDistance": 0.5931759290144683,
+          "recencyRankCorrelation": -0.4616541353383459,
+          "matched": 20
+        }
+      ]
+    },
+    {
+      "n": 40,
+      "observations": [
+        {
+          "arm": "rigid",
+          "query": "current task checkpoint goal status",
+          "returned": 40,
+          "rankOfNewest": 26,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.4780734564471689,
+          "newestDistance": 0.5446337804289569,
+          "recencyRankCorrelation": -0.1575984990619137,
+          "matched": 40
+        },
+        {
+          "arm": "rigid",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 40,
+          "rankOfNewest": 21,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5222657010784763,
+          "newestDistance": 0.581738270206775,
+          "recencyRankCorrelation": -0.18855534709193256,
+          "matched": 40
+        },
+        {
+          "arm": "rigid",
+          "query": "most recent session state, next step, blockers",
+          "returned": 40,
+          "rankOfNewest": 8,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5756418119991689,
+          "newestDistance": 0.6126906410040023,
+          "recencyRankCorrelation": -0.18874296435272053,
+          "matched": 40
+        },
+        {
+          "arm": "distinct",
+          "query": "current task checkpoint goal status",
+          "returned": 40,
+          "rankOfNewest": 14,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5596585006711442,
+          "newestDistance": 0.6442007783228363,
+          "recencyRankCorrelation": -0.2045028142589118,
+          "matched": 40
+        },
+        {
+          "arm": "distinct",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 40,
+          "rankOfNewest": 17,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5683346836380698,
+          "newestDistance": 0.6414738673234186,
+          "recencyRankCorrelation": -0.18142589118198882,
+          "matched": 40
+        },
+        {
+          "arm": "distinct",
+          "query": "most recent session state, next step, blockers",
+          "returned": 40,
+          "rankOfNewest": 6,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.53966227517468,
+          "newestDistance": 0.5995202089446798,
+          "recencyRankCorrelation": -0.24896810506566602,
+          "matched": 40
+        }
+      ]
+    },
+    {
+      "n": 60,
+      "observations": [
+        {
+          "arm": "rigid",
+          "query": "current task checkpoint goal status",
+          "returned": 60,
+          "rankOfNewest": 50,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.4780734564471689,
+          "newestDistance": 0.5652600881042222,
+          "recencyRankCorrelation": -0.0350652959155322,
+          "matched": 60
+        },
+        {
+          "arm": "rigid",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 60,
+          "rankOfNewest": 48,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5222657010784763,
+          "newestDistance": 0.5987230608799816,
+          "recencyRankCorrelation": -0.08646846346207271,
+          "matched": 60
+        },
+        {
+          "arm": "rigid",
+          "query": "most recent session state, next step, blockers",
+          "returned": 60,
+          "rankOfNewest": 19,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5756418119991689,
+          "newestDistance": 0.6267943349320617,
+          "recencyRankCorrelation": -0.13070297304806888,
+          "matched": 60
+        },
+        {
+          "arm": "distinct",
+          "query": "current task checkpoint goal status",
+          "returned": 60,
+          "rankOfNewest": 31,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5532144587846515,
+          "newestDistance": 0.6612435933654325,
+          "recencyRankCorrelation": -0.0837454848569048,
+          "matched": 60
+        },
+        {
+          "arm": "distinct",
+          "query": "what is the latest checkpoint and where did we leave off",
+          "returned": 60,
+          "rankOfNewest": 55,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5302472105805948,
+          "newestDistance": 0.7156755846280571,
+          "recencyRankCorrelation": -0.08046679633231446,
+          "matched": 60
+        },
+        {
+          "arm": "distinct",
+          "query": "most recent session state, next step, blockers",
+          "returned": 60,
+          "rankOfNewest": 46,
+          "foundWithinMarkovLimit": false,
+          "foundAtAll": true,
+          "topDistance": 0.5279616894837713,
+          "newestDistance": 0.6829930884292179,
+          "recencyRankCorrelation": -0.07802167268685745,
+          "matched": 60
+        }
+      ]
+    }
+  ]
+}

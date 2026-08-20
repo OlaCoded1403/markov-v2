@@ -1,0 +1,15 @@
+{
+  "name": "buildmem-v2-experiment",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A/B test of namespace routing vs the original BuildMEM single-bucket schema",
+  "scripts": {
+    "inspect": "node inspect-credentials.mjs",
+    "seed": "node run.mjs --seed",
+    "measure": "node run.mjs --measure"
+  },
+  "dependencies": {
+    "@mysten-incubation/memwal": "^0.1.2"
+  }
+}

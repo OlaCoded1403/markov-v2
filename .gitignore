@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Local, machine-specific Claude Code settings
+.claude/settings.local.json
+
+# Private capture sheet — real-session notes, deliberately not published
+blog/OBSERVATIONS.md
+
+# Transient run logs (results.json IS committed — it is the evidence)
+experiment/stage-run.log
+
+# Never commit credentials. They live in ~/.memwal/credentials.json, outside this repo,
+# and that file holds a raw delegate private key.
+*.key
+.env
+credentials.json
+
+# OS
+Thumbs.db
+.DS_Store
