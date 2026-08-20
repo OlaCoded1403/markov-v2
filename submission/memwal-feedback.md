@@ -285,3 +285,55 @@ in this session that filter on distance would misbehave on MCP.
 (1) is nearly free and would have prevented this entirely. Note also that MCP has no `maxDistance`
 parameter (issue 1 above), so MCP users must filter client-side on exactly the field whose polarity
 is undocumented.
+
+---
+
+## 10. The dashboard shows zero memories for an account holding 183 blobs, and the namespace control that would fix it does not persist
+
+**Type:** Bug — the account UI cannot see the account's own data
+
+Observed 2026-08-20 on [memory.walrus.xyz](https://memory.walrus.xyz), signed in to an account with
+183 blobs written on Mainnet across `markov.index`, `markov.state.*`, `markov.facts.*`,
+`mk.exp.*` and `mk.exp2.*` (relayer 0.1.0, API 1.0.0, build `2162d261`).
+
+1. The dashboard reports **no blob count and no memories**, before and after using its reload
+   control.
+2. There is a namespace field, but it lives in the **Developer Playground**, not on the dashboard.
+3. That field **does not persist**. Navigating to the dashboard and back resets it to `default`, so
+   any namespace you enter is lost.
+
+Meanwhile the same account, same credentials, returns records immediately from the CLI:
+
+```
+memwal_recall namespace="markov.state.markov-v2" query="current task checkpoint goal status" limit=100
+→ 5 records, newest 2026-08-20T14:08:00Z
+memwal_health → status=ok version=0.1.0
+```
+
+So the data is present, indexed, and decryptable. Only the UI cannot reach it.
+
+**Root cause is almost certainly issue 3** — no way to enumerate namespaces. If the API cannot list
+the namespaces an account has written to, the dashboard has nothing to iterate, so it falls back to
+`default` and finds it empty. Any agent following the documented pattern of routing writes to
+explicit per-topic namespaces is therefore invisible to its own dashboard by construction. This is
+the first-party consequence of that gap, and it is a good argument for fixing it at the API rather
+than working around it in each client.
+
+**Why it matters beyond cosmetics.** The dashboard is where a user goes to confirm their memory
+exists, to check a blob count, and to revoke a delegate key. Showing zero for a populated account
+is indistinguishable from data loss, which is an alarming thing to show someone about encrypted
+storage they cannot otherwise inspect. I had to count 183 blobs by recalling every namespace I
+happened to know the name of and summing — a method that only works because I wrote them and can
+therefore remember what they were called.
+
+**Suggested fix**, cheapest first:
+
+1. **Persist the Developer Playground namespace** across navigation. One-line fix, unblocks the
+   workaround immediately.
+2. **Put a namespace input on the dashboard itself**, with the caveat that the user must know the
+   name — honest and useful today.
+3. **Say so when the view is namespace-scoped.** "No memories in namespace `default`" is accurate
+   and reassuring; a bare empty state reads as "your memories are gone".
+4. **Best: add namespace enumeration to the API** (issue 3) and have the dashboard list namespaces
+   with per-namespace counts. That fixes this, removes the need for every agent prompt to maintain
+   its own registry, and makes the blob count self-serve.
