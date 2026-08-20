@@ -88,6 +88,7 @@ node run.mjs --report             # print the accumulated curve
 
 node analyse.mjs                 # significance tests over results.json — the numbers to quote
 node relayer-version.mjs         # relayer/API version and build, for provenance
+node blob-count.mjs              # read-only sweep of every known namespace — the blob count
 ```
 
 `analyse.mjs` is the one to read before writing anything up. It converts each rho into a z-score

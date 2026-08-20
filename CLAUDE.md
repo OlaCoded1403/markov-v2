@@ -81,9 +81,10 @@ node run.mjs --measure         # measure at the current N without writing
 node run.mjs --report          # print the accumulated curve
 node analyse.mjs               # significance tests over results.json — the numbers to quote
 node relayer-version.mjs       # relayer/API version + build, for provenance alongside distances
+node blob-count.mjs           # read-only sweep of every known namespace — the submission blob count
 ```
 
-The same six are wired as npm scripts (`npm run stage`, `npm run analyse`, …); see `package.json`.
+The same seven are wired as npm scripts (`npm run stage`, `npm run analyse`, …); see `package.json`.
 
 - ESM (`type: module`), Node 20+, one dependency (`@mysten-incubation/memwal`). No linter, no tests.
 - Credentials come from `~/.memwal/credentials.json` (or `MEMWAL_ACCOUNT_ID` / `MEMWAL_KEY`).

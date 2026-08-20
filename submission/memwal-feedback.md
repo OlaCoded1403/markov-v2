@@ -288,12 +288,12 @@ is undocumented.
 
 ---
 
-## 10. The dashboard shows zero memories for an account holding 183 blobs, and the namespace control that would fix it does not persist
+## 10. The dashboard shows zero memories for an account holding 185 blobs, and the namespace control that would fix it does not persist
 
 **Type:** Bug — the account UI cannot see the account's own data
 
 Observed 2026-08-20 on [memory.walrus.xyz](https://memory.walrus.xyz), signed in to an account with
-183 blobs written on Mainnet across `markov.index`, `markov.state.*`, `markov.facts.*`,
+185 blobs written on Mainnet across `markov.index`, `markov.state.*`, `markov.facts.*`,
 `mk.exp.*` and `mk.exp2.*` (relayer 0.1.0, API 1.0.0, build `2162d261`).
 
 1. The dashboard reports **no blob count and no memories**, before and after using its reload
@@ -322,7 +322,7 @@ than working around it in each client.
 **Why it matters beyond cosmetics.** The dashboard is where a user goes to confirm their memory
 exists, to check a blob count, and to revoke a delegate key. Showing zero for a populated account
 is indistinguishable from data loss, which is an alarming thing to show someone about encrypted
-storage they cannot otherwise inspect. I had to count 183 blobs by recalling every namespace I
+storage they cannot otherwise inspect. I had to count 185 blobs by recalling every namespace I
 happened to know the name of and summing — a method that only works because I wrote them and can
 therefore remember what they were called.
 

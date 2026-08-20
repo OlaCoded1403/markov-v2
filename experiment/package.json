@@ -10,7 +10,8 @@
     "measure": "node run.mjs --measure",
     "report": "node run.mjs --report",
     "analyse": "node analyse.mjs",
-    "version": "node relayer-version.mjs"
+    "version": "node relayer-version.mjs",
+    "count": "node blob-count.mjs"
   },
   "dependencies": {
     "@mysten-incubation/memwal": "^0.1.2"
