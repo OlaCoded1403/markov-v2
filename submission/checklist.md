@@ -55,12 +55,23 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
       pushing. This URL is what `blog/index.md` links to.
 - [ ] Full copy-pasteable prompt text in the form (from `PROMPT.md`, below the `---`)
 - [ ] 2–5 sentence explanation: problem solved + how it uses Walrus Memory (draft below)
-- [ ] Blog/article published — link: `________`
-      **The draft is complete — no unfilled markers.** It opens on the measurement rather than a
-      personal anecdote, which needed no evidence I don't have, and it cites blob ids instead of a
-      dashboard screenshot, which the dashboard cannot produce (see issue 10).
-- [ ] Walrus Memory feedback form completed
-- [ ] GitHub issue(s) filed at [MystenLabs/MemWal](https://github.com/MystenLabs/MemWal)
+- [x] **Blog/article published** — https://olacoded1403.github.io/markov-v2/
+      GitHub Pages, built from `blog/index.md` at the repo root via `permalink: /`. Verified live
+      2026-08-20: renders the full article, measurement tables intact, no raw front matter. It opens
+      on the measurement rather than a personal anecdote, and cites blob ids instead of a dashboard
+      screenshot, which the dashboard cannot produce (see issue 10).
+      *Edits go to `blog/index.md`; pushing to `main` rebuilds the site in about a minute.*
+- [ ] Walrus Memory feedback form completed — **URL not yet captured.** It was never recorded here,
+      and neither the session rules page nor the DeepSurge page can be read by an automated fetch
+      (403 and a JS-only shell respectively). Get the link from the rules page while signed in, or
+      ask in the Walrus Discord, and **record it on this line** so the next session doesn't re-hunt it.
+- [ ] GitHub issue(s) filed at [MystenLabs/MemWal](https://github.com/MystenLabs/MemWal/issues/new)
+      Issues are open (216 currently open, no issue templates to conform to). File the ten in
+      `memwal-feedback.md` as **separate issues** — the Bug Bounty track is judged per issue on
+      quality and actionability, so an omnibus post scores once instead of ten times.
+      Suggested order, strongest first: **4** (recall cannot order by time — the measured one),
+      **2** (no metadata filtering), **9** (`score` vs `distance`), **3** (no namespace enumeration),
+      **10** (dashboard shows nothing), then 1, 5, 6, 7, 8 and the docs nits.
 - [ ] Joined [Walrus Discord](https://discord.com/invite/walrusprotocol)
 - [ ] Posted demo video / screenshot / link on X with **#Walrus** — link: `________`
 - [ ] Optional: Discord handle of referrer (worth 50% of prize to them, costs you nothing)
