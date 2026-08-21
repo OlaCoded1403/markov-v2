@@ -96,6 +96,17 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
       on the measurement rather than a personal anecdote, and cites blob ids instead of a dashboard
       screenshot, which the dashboard cannot produce (see issue 10).
       *Edits go to `blog/index.md`; pushing to `main` rebuilds the site in about a minute.*
+- [ ] **Cross-posted to Medium** — link: `________`
+      `submission/medium-article.md` is the paste-ready version: front matter stripped, title and
+      subtitle at the top, an "originally published at" line at the bottom.
+      **Best route is Medium's Import Story** at `medium.com/p/import` — give it
+      `https://olacoded1403.github.io/markov-v2/` and it converts the page *and* sets the canonical
+      link back automatically, so the two copies don't compete in search. Failing that, copy from the
+      **rendered** GitHub Pages page, never the raw markdown — Medium does not convert markdown on
+      paste, so a raw paste arrives as one wall of plain text with literal `##` in it.
+      After importing, check the two data tables survived as monospace code blocks; they are ASCII
+      inside code fences precisely because Medium has no table support.
+      Suggested tags: AI Agents · Prompt Engineering · Web3 · Software Engineering · Walrus.
 - [ ] Walrus Memory feedback form completed — **URL not yet captured.** It was never recorded here,
       and neither the session rules page nor the DeepSurge page can be read by an automated fetch
       (403 and a JS-only shell respectively). Get the link from the rules page while signed in, or
