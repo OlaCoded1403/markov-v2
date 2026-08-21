@@ -67,26 +67,49 @@ loaded by reference."*
 
 This matters. Without it a viewer assumes you pasted the prompt in and the demo is circular.
 
-## 2. Open Claude Code and register the project — 30s
+## 2. Open Claude Code and show it already remembers — 40s
+
+**Do not ask it to register the project.** That was already done at `2026-08-21T00:00:00Z`, and a
+second write would create a permanent duplicate — memory has no dedup. Asking anyway gets a correct
+refusal, which is a fine thing to film deliberately but a confusing way to open.
+
+The state as of 2026-08-21:
+
+| Namespace | Contents |
+|---|---|
+| `markov.index` | `vibez-protocol` registered |
+| `markov.facts.vibez-protocol` | 4 real facts about this project |
+| `markov.state.vibez-protocol` | **empty — no checkpoint has ever been written** |
+
+That empty state namespace is the gift. The handoff in step 4 writes **the first checkpoint this
+project has ever had**, so what Antigravity resumes in step 6 is unambiguously new, created minutes
+earlier, on camera.
 
 ```
 claude
 ```
 
-Then type:
+Then:
 
-> register this project in `markov.index`: name Vibez Protocol, aliases "vibez", "vibezprotocol",
-> "vibez protocol", slug `vibez-protocol`. Stack: FastAPI backend, static frontend, deployed on Render.
+> what do you already know about this project, and has anything been checkpointed for it?
 
-Say while it runs: *"The folder is `vibezprotocol-full`, the repo is `vibezprotocol`, the slug is
-`vibez-protocol` — three different strings for one project. Nothing in Walrus Memory can list the
-namespaces an account has written to, so without this registry a later session has no route from
-what I call the project to where its memory actually lives."*
+It recalls `markov.index`, resolves the slug, reads `markov.facts.vibez-protocol`, and reports four
+facts and no checkpoints. Say: *"I have never opened Claude in this project during this recording.
+It knows the Render services, the port 8001 rule, and that the production hostname is duplicated in
+four files — because a session last night wrote that to Walrus. There is no memory prompt in this
+repo; it's loaded by reference from another one."*
 
-**Point at the `saved → blob <id>` receipt.** Keep that id visible; it's your step 5 shot.
+Worth adding: *"The folder is `vibezprotocol-full`, the repo is `vibezprotocol`, the slug is
+`vibez-protocol` — three strings for one project. Nothing in Walrus Memory can list the namespaces
+an account has written to, so without that registry there is no route from what I call the project
+to where its memory lives."*
 
-This is also the first time `markov.index` holds more than one slug, so rule 3.3's name-to-slug
-resolution is genuinely exercised here rather than assumed.
+The registry now holds two slugs, so rule 3.3's name-to-slug resolution is genuinely exercised here
+rather than assumed.
+
+**Optional, and good footage if you want it:** ask it to register the project anyway. It will decline
+because rule 5.1(b) finds the existing record, and explain that re-writing would duplicate
+permanently. That is the write gate catching a real duplicate live — worth 15 seconds.
 
 ## 3. Do a real piece of work — 45s
 
@@ -142,6 +165,13 @@ Type:
 
 Rule 7 runs the write gate, writes any durable facts plus a checkpoint, echoes the blob ids, and
 closes with *"Any Markov body can pick this up."*
+
+Because `markov.state.vibez-protocol` is empty, this is **the first checkpoint this project has ever
+had**, and its `Supersedes:` line will read `none`. Point that out — it means what the second client
+resumes in step 6 cannot be anything other than the record you just watched being written.
+
+If it tries to re-store one of the four facts already known, it should skip it and say so. Let it —
+that is the gate working, and it costs five seconds.
 
 **Read the checkpoint timestamp aloud.** That exact string is what the next client has to name, and
 saying it before the switch is what makes the next shot unfalsifiable.
