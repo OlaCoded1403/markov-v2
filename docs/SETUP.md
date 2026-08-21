@@ -85,9 +85,39 @@ trust any of this.
 ## 4. Install the prompt
 
 Copy everything below the `---` in [`../PROMPT.md`](../PROMPT.md) into your project's `CLAUDE.md`
-— or `AGENTS.md` for Codex and Antigravity CLI, or Cursor rules, or any client's system prompt. No
-client I have tried can be pointed at a file called `PROMPT.md`, so this is a copy, and copies
-drift; §7 step 4 has the regenerate-and-diff pattern that keeps them honest.
+— or `AGENTS.md` for Codex and Antigravity CLI, or Cursor rules, or any client's system prompt.
+Copies drift; §7 step 4 has the regenerate-and-diff pattern that keeps them honest.
+
+### Better: install it once, for every project, without copying
+
+A per-project copy is fine for one repo and a liability across five. Both clients can load the
+prompt from wherever it already lives, so there is exactly one file to maintain. Verified in both
+on 2026-08-21.
+
+**Claude Code** — put a single import in your user-level memory file, `~/.claude/CLAUDE.md`. It
+loads in *every* project on the machine, absolute paths are allowed, and imports in user-scope files
+are trusted without a prompt:
+
+```markdown
+@C:/Users/vibez/Documents/markov-v2/AGENTS.md
+```
+
+Confirm with `/context` — the file appears under **Memory files**. It concatenates with, rather than
+replaces, whatever `CLAUDE.md` the project already has, so a repo keeps its own instructions and
+gains the memory rules.
+
+**Antigravity CLI** — pass the prompt's home as an extra workspace directory. `agy` discovers
+`AGENTS.md` there even when you launch from an unrelated folder:
+
+```bash
+agy --add-dir "C:\Users\vibez\Documents\markov-v2"
+```
+
+Without it, `agy` opens with no workspace, never loads `AGENTS.md`, and answers as though it has no
+memory — a failure that looks nothing like a memory failure. See §7 step 5.
+
+**Codex and Cursor** read `AGENTS.md` from the repo root, so they still need a copy or a symlink
+(`ln -s`, which on Windows needs Developer Mode).
 
 Then seed the registry so the agent has a project to route to — nothing can enumerate namespaces,
 so `markov.index` is the only way back to your own slugs:
