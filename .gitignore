@@ -19,3 +19,6 @@ credentials.json
 # OS
 Thumbs.db
 .DS_Store
+
+# Generated proofing audio — regenerate with submission/make-voiceover.ps1
+submission/voiceover-audio/
