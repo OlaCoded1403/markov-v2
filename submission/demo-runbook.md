@@ -178,13 +178,20 @@ saying it before the switch is what makes the next shot unfalsifiable.
 
 Then close the session (`Ctrl+C`, or `/exit`).
 
-## 5. Show the blob on Walruscan — 15s
+## 5. Show the blob on Walruscan — 60s, and this one is load-bearing
 
 Paste one of the ids onto `https://walruscan.com/mainnet/blob/`.
 
 Say: *"Mainnet, not a local database. Anyone can open this without my credentials."*
 
-Two seconds of screen time that kills the "did you actually store anything" question.
+**Do not rush this shot.** Writes are asynchronous and the search index lags by seconds — rule 7.4
+exists because of it. Switching to the second client too fast is the one way to get a "no
+checkpoint found" on camera when the write actually succeeded perfectly. Give it **about a minute**,
+which is exactly what this shot is for: the walruscan lookup, reading the blob id aloud, and saying
+the line above fills the gap naturally, so the pause never looks like waiting.
+
+Do **not** fix a slow write by re-running `handoff`. There is no deduplication, and a retry landing
+beside a slow original leaves two permanent copies.
 
 ## 6. Switch to Antigravity, cold — 40s
 
@@ -197,11 +204,23 @@ agy --add-dir "C:\Users\vibez\Documents\walrus"
 Say: *"Different vendor, different model, no access to the conversation I just closed. The
 `--add-dir` is how it finds the prompt — the prompt is not in this project."*
 
-Then type one word:
+Then — **name the project. Do not use a bare "where".**
 
-> where
+> where did we leave off on Vibez Protocol?
 
-It must open with **Goal / Done / Next / Blockers** naming the checkpoint from step 4.
+**Why this matters, tested 2026-08-21:** `--add-dir` puts the whole Markov v2 repo into agy's
+workspace, and a bare `where` makes it infer *that* as the project. It resolved slug `markov-v2` and
+resumed the submission checkpoint — the wrong project, confidently, with no error. Naming the
+project fixes it, because rule 3.3 says an explicitly named project always beats an inferred one; the
+retest resolved `vibez-protocol` and pulled its four facts.
+
+This is worth saying on camera rather than hiding. It demonstrates the registry doing real work:
+two projects, two slugs, and the name is what selects between them.
+
+It must then open with **Goal / Done / Next / Blockers** naming the checkpoint from step 4.
+
+Expect agy to ask permission to run a shell command such as `git status -s` on the way. Approve it;
+it is just orienting itself.
 
 ## 7. The question that proves it wasn't luck — 30s
 
@@ -223,6 +242,9 @@ Close on that. It is the entire submission in one sentence, spoken by a model fr
 - **Antigravity answers "you currently do not have an active workspace folder opened"** → the
   `--add-dir` was missing or mistyped. The prompt never loaded. Relaunch. Not a memory failure, and
   it looks nothing like one — which is exactly why it's worth knowing.
+- **Antigravity resumes the wrong project** — it starts talking about the Walrus submission, blob
+  counts and the 24 Aug deadline → you used a bare `where`. The `--add-dir` repo is in its workspace
+  and it inferred that project. Say the project's name and ask again; rule 3.3 resolves it.
 - **Either client says "fresh start, no stored state"** → don't re-record yet. Run the §8 ladder on
   camera: `memwal_health`, then `memwal_restore` with an explicit `limit: 100` (the default is 10 and
   silently under-restores), then recall again. Recovering live is *better footage* than a clean take.
