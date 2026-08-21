@@ -41,7 +41,32 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
       live demonstration of the no-deduplication behaviour rule 5.1(b) exists to guard against, and
       worth citing as such rather than quietly correcting.
     - Relayer 0.1.0, API 1.0.0, build `2162d261`.
-- [x] All memory on Walrus **Mainnet** — relayer confirmed `https://relayer.memory.walrus.xyz`
+- [x] All memory on Walrus **Mainnet** — and proved against the network, not just the config.
+      The relayer is `https://relayer.memory.walrus.xyz` (staging would be `relayer-staging…`, which
+      `experiment/run.mjs` hard-refuses), reporting relayer 0.1.0 / API 1.0.0. But the decisive check
+      is that the blobs are retrievable from a **mainnet-only** Walrus aggregator — testnet and
+      mainnet are separate networks with separate storage nodes, so a testnet blob 404s there.
+      Verified 2026-08-21, anyone can repeat it with no credentials:
+
+      ```bash
+      curl -sI https://aggregator.walrus-mainnet.walrus.space/v1/blobs/<blob_id>
+      ```
+
+      | Blob | Namespace | Result |
+      |---|---|---|
+      | `38GpPskxLyqPFmX7eNQNVlYiEXznGgmPTKn85laLbbc` | `markov.state.markov-v2` | 200, 2821 bytes |
+      | `XGwmfgyuvpbQrVyj31qeH43aL6HI-qpw1iUX_USWwWU` | `markov.state.markov-v2` | 200, 2957 bytes |
+      | `8IeDT6rGsxHzMcM8dk9paTaXou6MMC-nVYvPlClSZ8o` | `mk.exp2.rigid` | 200, 712 bytes |
+      | `MxdlNaa4vknk8gHjhGTKuABaxU2-j9LSofpzS7YpiFs` | `mk.exp2.rigid` | 200, 693 bytes |
+
+      Both halves are covered: the real-use checkpoints **and** the experiment corpus the measurement
+      rests on. Retrieved bytes are high-entropy with no plaintext, i.e. encrypted at rest as
+      documented.
+
+      **The Sessions wallet holds no SUI, and that is expected.** The Foundation's hosted relayer
+      pays for storage — funding is only needed to self-host one (`docs/SETUP.md` §1). An empty
+      balance is not evidence of testnet, and it is not why the dashboard shows nothing: the
+      Developer Playground returned records from that same unfunded account in the same session.
 - [x] Dedicated Sessions wallet created — address:
       `0xad0d1b726e36b923da027171dea945240aa76d05d7917d34dfc50a76637b180d`
       *(This is the wallet that signed in — the one to put in the form. Do **not** paste the delegate
