@@ -90,20 +90,49 @@ resolution is genuinely exercised here rather than assumed.
 
 ## 3. Do a real piece of work — 45s
 
-Use a real wart your own `CLAUDE.md` already documents, so nothing is staged:
+**Nothing here edits a file.** The prompt's claim is that a *decision* survives a tool switch, so an
+investigation that ends in a decision is the demo. Code changes would only add risk and dead air.
 
-> The API base URL is hardcoded in two places — `frontend/script.js` and
-> `backend/static/admin.html`. Look at both and tell me whether they can be collapsed into one
-> source, and what breaks if I get it wrong.
+Four layers of safety, in case one fails:
 
-It'll find `const API_URL` in `script.js` (a hostname check falling back to
-`http://localhost:8001/api`) and `const API = '/api'` in `admin.html` — genuinely different shapes,
-because one is served from the backend and one isn't. **Make an actual decision out loud.** The
-decision is what has to survive the tool switch; the code change does not need to happen on camera.
+1. **Phrase it as a question** — "read", "tell me", "what would break". Claude answers; it has no
+   reason to edit.
+2. **Hard lock, if you want one:** press `Shift+Tab` to enter **plan mode** before asking. It cannot
+   write files in that mode. Press it again to leave *before* step 4 — the handoff has to write to
+   memory, so don't run the whole session in plan mode.
+3. **The working tree is clean** (checked 2026-08-21). If anything did change, `git checkout .`
+   reverts it.
+4. **Render cannot see your machine.** It deploys from a pushed branch. Local edits are inert until
+   `git push`, and you are not pushing during a recording.
 
-*Alternative if you'd rather:* the no-migrations trap. `create_all()` only creates missing tables and
-never alters an existing one, so a model edit silently does nothing to a live database. Deciding
-whether to add Alembic is a real call with a real consequence.
+Pick one of these — all read-only, all real, all documented in the project's own `CLAUDE.md` so
+nothing is staged:
+
+**A — asymmetric escaping (recommended).** The most interesting to watch, and a genuine decision:
+
+> Two render paths handle project data differently — `backend/static/admin.html` escapes through
+> `escHtml()` before `innerHTML`, while `frontend/script.js` interpolates project fields raw. Read
+> both and tell me what an admin-authored value would have to contain to break the public page.
+> Don't change anything.
+
+The honest answer is "project data is admin-authored, so this is latent rather than exploitable" —
+and the decision worth carrying is *whether that stays true if authoring is ever opened up*.
+
+**B — the port discrepancy.** Fastest and most visual, a couple of greps:
+
+> The READMEs say port 8000 but the app runs on 8001. Which files disagree, which is authoritative,
+> and what breaks for someone following the README? Read only, don't edit.
+
+**C — the no-migrations trap.** The deepest decision, the slowest to film:
+
+> `init_db()` uses `create_all()`, which only creates missing tables and never alters an existing
+> one. Which model changes since the Render tables were created would silently not exist in
+> production? Don't change anything.
+
+Whichever you pick, **say the decision out loud.** That sentence is what step 6 has to hand back.
+
+> One more: in step 6 Antigravity may offer to act on the checkpoint's `Next:` line. Decline. The
+> video ends on the answer in step 7, not on a change to a live project.
 
 ## 4. Hand off — 25s
 
