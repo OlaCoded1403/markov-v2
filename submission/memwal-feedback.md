@@ -6,6 +6,53 @@ engineering team). File them as separate issues, not one omnibus.
 
 Every item below came out of actually building against the API. Ordered by how strong I think they are.
 
+## Duplicate audit — read this before filing anything
+
+I checked all 178 open issues on the tracker on 2026-08-21 before filing. **Most of what I found was
+already reported**, in several cases by other entrants in this same session. Filing duplicates would
+be worse than filing nothing: the Bug Bounty is judged on quality and actionability, and a maintainer
+closing six of your issues as duplicates is not a good look.
+
+| Mine | Already filed as | Verdict |
+|---|---|---|
+| 1. No `maxDistance` on MCP recall | **#373** "Expose Similarity threshold / MaxDistance parameters to the MCP Recall tool" | duplicate — do not file |
+| 2. No metadata filtering | **#434**, **#395** | duplicate — do not file |
+| 3. No namespace enumeration | **#698**, **#634**, **#464**, **#366**, **#310**, **#416**, **#626** | duplicate ×7 — do not file |
+| 4. Recall cannot order by time | **#695** (same finding, names Markov explicitly), **#708** (the root cause), **#395** | duplicate — **but see below** |
+| 5. `restore` silently drops undecryptable blobs | adjacent: **#622** (same gap on `recall`) | weak — documented behaviour in SKILL.md, and the recall half is already filed |
+| 6. `restore` default limit 10, no cursor | adjacent: **#528**, **#382** | weak — SKILL.md documents it and says pagination is on the roadmap |
+| 7. Namespaces not normalized | adjacent: **#475** (12-char truncation), **#392**, **#416** | partly novel — the `namespace_is_new` flag suggestion is not filed anywhere |
+| 8. No update / supersede path | **#697**, **#464**, **#449**, **#444** | duplicate ×4 — do not file |
+| 9. `score` vs `distance` | **#715**, filed 2026-08-21, hours before I checked | duplicate — do not file |
+| 10. Dashboard shows nothing for a populated account | nothing matching. **#626** is the API-level cause, **#364** and closed **#719** are other dashboard issues | **novel — file this** |
+
+**On #4, which is the whole submission's finding.** #695 asserts it and #708 identifies the root
+cause: recency-weighted ranking *is* implemented in the SDK as `ScoringWeights` — with `recency` and
+`recencyHalfLifeDays` fields — but it is only wired into `recallManual()`, which requires you to
+supply your own query embedding. The ordinary `recall()` never reads it, and MCP cannot reach it at
+all. I verified this independently in the installed SDK's `types.d.ts`: `RecallOptions` carries only
+`limit`, `topK`, `namespace`, `maxDistance`.
+
+That does not make Markov v2's claim wrong — rule 1.4 is scoped to `memwal_recall`, which genuinely
+has no such parameter — but it does mean **a new issue from me would add nothing**. What neither #695
+nor #708 has is *measurement*. They argue from the API surface; I have 120 blobs on mainnet, the rank
+of the newest checkpoint at three namespace sizes, Spearman's rho decaying −0.32 → −0.16 → −0.03, and
+significance testing across 18 cells showing no recency signal in 17 of them. **That belongs as a
+comment on #695 and #708, not as an eleventh issue saying the same thing without the numbers.**
+
+**Verified against the shipped SDK, not just the docs**, on 2026-08-21 (`@mysten-incubation/memwal`
+in `experiment/node_modules`): no `listNamespaces` method exists; `remember()` takes only
+`idempotencyKey` as an option, no metadata; `restore(namespace, limit?)` has no cursor; `recall()`
+has `maxDistance` while the MCP schema does not; `RestoreResult` **does** carry `truncated`, though
+`SKILL.md`'s API table still omits it. SKILL.md line 363 confirms the silent-drop behaviour verbatim
+and line 373 confirms "Restore is single-shot — there is no cursor".
+
+**One scare, checked and dismissed.** #475 reports that namespace identifiers silently truncate to 12
+characters. If that applied here, `markov.facts.markov-v2` and `markov.facts.global` would both
+truncate to `markov.facts` and merge. They don't: a sweep on 2026-08-21 returned 7 records and 11
+records respectively with no bleed between them, so whatever #475 describes does not affect this
+account's layout.
+
 ---
 
 ## 1. MCP `memwal_recall` has no `maxDistance`, so the docs' own filtering guidance doesn't apply to MCP users
