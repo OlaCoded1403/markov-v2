@@ -76,10 +76,14 @@ console.log(`slugs in markov.index: ${slugs.length ? slugs.join(", ") : "(none f
 let real = 0;
 let experiment = 0;
 let truncated = [];
+let failed = [];
 
 for (const ns of targets) {
   const rows = ns === "markov.index" ? indexRows : await count(ns);
-  if (rows === null) continue;
+  if (rows === null) {
+    failed.push(ns);
+    continue;
+  }
   const n = rows.length;
   if (n === MAX_LIMIT) truncated.push(ns);
 
@@ -96,7 +100,20 @@ for (const ns of targets) {
 
 console.log(`\n  real use (markov.*)   ${String(real).padStart(4)}`);
 console.log(`  experiment (mk.exp*)  ${String(experiment).padStart(4)}`);
-console.log(`  TOTAL                 ${String(real + experiment).padStart(4)}`);
+
+// A namespace that errored is not a namespace that is empty — printing a total over a
+// partial sweep is the same mistake the prompt's rule 8.5 exists to prevent, and it bit
+// this script on 2026-08-21 when the network dropped and it cheerfully reported TOTAL 0.
+if (failed.length) {
+  console.log(`  TOTAL                 UNKNOWN — do not quote this run`);
+  console.log(
+    `\n  ! ${failed.length} namespace${failed.length > 1 ? "s" : ""} failed to respond: ${failed.join(", ")}` +
+      `\n    These errored; that is not the same as being empty. Re-run before citing a count.`,
+  );
+  process.exitCode = 1;
+} else {
+  console.log(`  TOTAL                 ${String(real + experiment).padStart(4)}`);
+}
 
 if (truncated.length) {
   console.log(

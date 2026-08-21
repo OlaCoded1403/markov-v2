@@ -64,7 +64,7 @@ fallback.
 ## Run under itself
 
 This repository was built by an agent running this prompt, with its own state in Walrus Memory —
-185 blobs on Sui Mainnet at the time of writing. Two of the rules here exist because that turned up
+204 blobs on Sui Mainnet at the time of writing. Two of the rules here exist because that turned up
 failures no amount of re-reading would have: rule 1.5 (the MCP surface reports `score`, not
 `distance`, so every documented threshold inverts) and rule 3.5 (the resume summary got silently
 skipped when a session opened with a slash command — retrieval worked, the report to the human

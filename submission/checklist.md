@@ -9,32 +9,42 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
 - [ ] Submitted the [Airtable form](https://airtable.com/appoDAKpC74UOqoDa/shrASgVC645QpqFiQ)
 - [x] **≥10 blobs written on Mainnet** — agent ID + blob count in the DeepSurge form
   - Agent ID (Walrus Memory account): `0x6b5a3d090d63ad7390c47c453f5eebdb0ae62b3c0035c379ad7d51d6eadb888a`
-  - Blob count: **185** as of 2026-08-20T15:05Z. **Re-sweep before submitting** — real sessions keep
+  - Blob count: **204** as of 2026-08-21T11:00Z. **Re-sweep before submitting** — real sessions keep
     adding to it — with `node experiment/blob-count.mjs`, which is read-only and prints this table:
 
     ```
-    markov.index                    1
-    markov.facts.global            11
+    markov.index                    2
+    markov.facts.global            17
     markov.capsules                 0
-    markov.state.markov-v2          6   (1 duplicate blob)
-    markov.facts.markov-v2          7
+    markov.state.markov-v2          7   (1 duplicate blob)
+    markov.facts.markov-v2         10
+    markov.state.vibez-protocol     1
+    markov.facts.vibez-protocol     7
     mk.exp.rigid                   20
     mk.exp.distinct                20
     mk.exp2.rigid                  60
     mk.exp2.distinct               60
 
-    real use (markov.*)     25
+    real use (markov.*)     44
     experiment (mk.exp*)   160
-    TOTAL                  185
+    TOTAL                  204
     ```
 
     - 160 from the experiment. Unchanged since 2026-08-19; that side is finished and must not be
-      padded. 25 from real use — the `markov.*` blobs are what the Best Real-World Experience
-      criterion reads, so grow that side.
+      padded. **44 from real use** — the `markov.*` blobs are what the Best Real-World Experience
+      criterion reads, and that is the number to quote when the question is about real usage.
+    - **Two projects now**, which is the point of `markov.index`: `markov-v2` (this submission) and
+      `vibez-protocol` (a live portfolio site, worked on under the prompt and recorded on video).
+      The registry holding more than one slug is what makes rule 3.3's name-to-slug resolution a
+      demonstrated behaviour rather than an assumed one.
     - **Count with the SDK, not the MCP tools.** MCP collapses byte-identical records in its output
       ("1 duplicate copy collapsed"), which is helpful when reading and wrong when counting. It cost
       me a misattributed duplicate before I noticed.
-    - `markov.state.markov-v2` holds 6 blobs but only **5 distinct checkpoints**: the
+    - **A failed sweep is not an empty one.** On 2026-08-21 the network dropped mid-run and the
+      script printed `TOTAL 0` as though authoritative — the same empty-versus-failed confusion rule
+      8.5 exists to prevent. It now prints `TOTAL UNKNOWN`, names the namespaces that errored, and
+      exits non-zero. Do not quote a run that reports UNKNOWN.
+    - `markov.state.markov-v2` holds 7 blobs but only **6 distinct checkpoints**: the
       `2026-08-20T13:07:00Z` checkpoint exists twice, as blobs `W6Yjjh0V1hD0KfhH42BPmun9Vsd5Mz9pVz8EfMhGHTY`
       and `nOaQejkqhgWyGaEdeE4Fmhm_kb6EbClyEk2OY1QIZe8` — written once, then written again by a
       later session that did not check first. Both are real and both are permanent. An unplanned
@@ -97,6 +107,8 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
       judge asks why this entry filed two issues instead of ten, the audit is the answer.
 - [ ] Joined [Walrus Discord](https://discord.com/invite/walrusprotocol)
 - [ ] Posted demo video / screenshot / link on X with **#Walrus** — link: `________`
+      Video recorded 2026-08-21: the cross-tool handoff on `vibez-protocol`, Claude Code → Antigravity,
+      first checkpoint that project ever had. Both replies transcribed in `blog/OBSERVATIONS.md` §B.
 - [ ] Optional: Discord handle of referrer (worth 50% of prize to them, costs you nothing)
 
 ## Eligibility confirmed
@@ -118,7 +130,7 @@ which is gitignored and stays private.
 |---|---|
 | The defect is measured, not argued | 120 blobs, 3 rounds, ranks 13/20 · 26/40 · 50/60; Spearman rho −0.32 → −0.16 → −0.03; no significant recency signal in 17 of 18 cells. `experiment/`, `node analyse.mjs`. |
 | The prompt works across tools | Checkpoint `2026-08-20T13:32:00Z` written from Claude Code, resumed 4 minutes later in Antigravity CLI (`agy` 1.1.16) off the one-word prompt "where". It named the checkpoint and, asked how it chose, described exhaustive recall at `limit: 100` + ISO 8601 parse + chronological sort. |
-| It was really used | 25 blobs in `markov.*` across two days of actual work, including this checklist and the article. Two prompt rules (1.5, 3.5) exist *because* of failures observed while using it. |
+| It was really used | 44 blobs in `markov.*` across two days of actual work, including this checklist and the article. Two prompt rules (1.5, 3.5) exist *because* of failures observed while using it. |
 | Honest about its own failures | Rule 3.5 was silently skipped under a slash-command opener, and a duplicate checkpoint blob got written past the write gate. Both are documented rather than tidied away. |
 | Mainnet | Relayer `https://relayer.memory.walrus.xyz`, relayer 0.1.0, API 1.0.0, build `2162d261`. |
 

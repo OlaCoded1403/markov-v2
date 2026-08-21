@@ -13,7 +13,7 @@ Filed 2026-08-21 as **OlaCoded1403**:
 | | |
 |---|---|
 | [**#722**](https://github.com/MystenLabs/MemWal/issues/722) | MCP `memwal_recall` collapses byte-identical records from *different* blobs, and the note doesn't say which record was duplicated. Novel; looks like an over-reach of #682's fix for #694. |
-| [**#723**](https://github.com/MystenLabs/MemWal/issues/723) | Dashboard shows no memories and no blob count for an account holding 185 blobs; the Playground's namespace field resets to `default` on navigation. Novel. |
+| [**#723**](https://github.com/MystenLabs/MemWal/issues/723) | Dashboard shows no memories and no blob count for an account holding 204 blobs; the Playground's namespace field resets to `default` on navigation. Novel. |
 | [**#695 comment**](https://github.com/MystenLabs/MemWal/issues/695#issuecomment-5367013737) | The mainnet measurement, added to the canonical recency issue rather than filed again. |
 | [**#708 comment**](https://github.com/MystenLabs/MemWal/issues/708#issuecomment-5367014167) | Independent confirmation of the `ScoringWeights` root cause from the shipped SDK, plus the measurement and the MCP-surface consequence. |
 
@@ -351,12 +351,12 @@ is undocumented.
 
 ---
 
-## 10. The dashboard shows zero memories for an account holding 185 blobs, and the namespace control that would fix it does not persist
+## 10. The dashboard shows zero memories for an account holding 204 blobs, and the namespace control that would fix it does not persist
 
 **Type:** Bug — the account UI cannot see the account's own data
 
 Observed 2026-08-20 on [memory.walrus.xyz](https://memory.walrus.xyz), signed in to an account with
-185 blobs written on Mainnet across `markov.index`, `markov.state.*`, `markov.facts.*`,
+204 blobs written on Mainnet across `markov.index`, `markov.state.*`, `markov.facts.*`,
 `mk.exp.*` and `mk.exp2.*` (relayer 0.1.0, API 1.0.0, build `2162d261`).
 
 1. The dashboard reports **no blob count and no memories**, before and after using its reload
@@ -385,7 +385,7 @@ than working around it in each client.
 **Why it matters beyond cosmetics.** The dashboard is where a user goes to confirm their memory
 exists, to check a blob count, and to revoke a delegate key. Showing zero for a populated account
 is indistinguishable from data loss, which is an alarming thing to show someone about encrypted
-storage they cannot otherwise inspect. I had to count 185 blobs by recalling every namespace I
+storage they cannot otherwise inspect. I had to count 204 blobs by recalling every namespace I
 happened to know the name of and summing — a method that only works because I wrote them and can
 therefore remember what they were called.
 

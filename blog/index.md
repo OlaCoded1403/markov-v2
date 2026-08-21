@@ -296,18 +296,18 @@ There is also no way to enumerate the namespaces you have written to, which is t
 `markov.index` exists — a registry the agent maintains by hand because the platform can't list its
 own buckets. Both are filed as issues; neither is a reason not to use it.
 
-**Blob count.** 185 blobs on Sui Mainnet as I write this — 160 from the experiment above, 25 from
+**Blob count.** 204 blobs on Sui Mainnet as I write this — 160 from the experiment above, 44 from
 actually working this way for two days. Every write returns an id you can open without credentials;
 [here is the checkpoint](https://walruscan.com/mainnet/blob/38GpPskxLyqPFmX7eNQNVlYiEXznGgmPTKn85laLbbc)
 that the second client resumed from, and
 [here is the one that superseded it](https://walruscan.com/mainnet/blob/XGwmfgyuvpbQrVyj31qeH43aL6HI-qpw1iUX_USWwWU)
 an hour later.
 
-I counted those 185 by recalling every namespace I know about and summing, because there is no
+I counted those 204 by recalling every namespace I know about and summing, because there is no
 other way. The dashboard shows me nothing — not because the blobs aren't there, but because Walrus
 Memory cannot enumerate namespaces, and this prompt writes to explicit ones only. It is a small,
 funny consequence of the same gap that makes rule 2.1 keep a registry by hand: I have an account
-holding 185 encrypted records and no interface that can list them for me. Everything above is
+holding 204 encrypted records and no interface that can list them for me. Everything above is
 reproducible; that one is just the state of the tooling in August 2026.
 
 ## Try it
