@@ -6,6 +6,22 @@ engineering team). File them as separate issues, not one omnibus.
 
 Every item below came out of actually building against the API. Ordered by how strong I think they are.
 
+## FILED — what went in, and what deliberately did not
+
+Filed 2026-08-21 as **OlaCoded1403**:
+
+| | |
+|---|---|
+| [**#722**](https://github.com/MystenLabs/MemWal/issues/722) | MCP `memwal_recall` collapses byte-identical records from *different* blobs, and the note doesn't say which record was duplicated. Novel; looks like an over-reach of #682's fix for #694. |
+| [**#723**](https://github.com/MystenLabs/MemWal/issues/723) | Dashboard shows no memories and no blob count for an account holding 185 blobs; the Playground's namespace field resets to `default` on navigation. Novel. |
+| [**#695 comment**](https://github.com/MystenLabs/MemWal/issues/695#issuecomment-5367013737) | The mainnet measurement, added to the canonical recency issue rather than filed again. |
+| [**#708 comment**](https://github.com/MystenLabs/MemWal/issues/708#issuecomment-5367014167) | Independent confirmation of the `ScoringWeights` root cause from the shipped SDK, plus the measurement and the MCP-surface consequence. |
+
+**Nothing else was filed, on purpose.** Six of the ten drafts below were already on the tracker, and
+`memwal_recall doesn't return blob_id` — which I nearly filed as an eleventh — is already #405. The
+audit that follows is the record of that check; keep it, because it is also the answer if anyone asks
+why this entry filed two issues instead of ten.
+
 ## Duplicate audit — read this before filing anything
 
 I checked all 178 open issues on the tracker on 2026-08-21 before filing. **Most of what I found was

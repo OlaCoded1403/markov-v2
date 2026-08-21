@@ -65,13 +65,11 @@ Base prompt being evolved: **Markov** (`dun999/markov`) → **Markov v2**.
       and neither the session rules page nor the DeepSurge page can be read by an automated fetch
       (403 and a JS-only shell respectively). Get the link from the rules page while signed in, or
       ask in the Walrus Discord, and **record it on this line** so the next session doesn't re-hunt it.
-- [ ] GitHub issue(s) filed at [MystenLabs/MemWal](https://github.com/MystenLabs/MemWal/issues/new)
-      Issues are open (216 currently open, no issue templates to conform to). File the ten in
-      `memwal-feedback.md` as **separate issues** — the Bug Bounty track is judged per issue on
-      quality and actionability, so an omnibus post scores once instead of ten times.
-      Suggested order, strongest first: **4** (recall cannot order by time — the measured one),
-      **2** (no metadata filtering), **9** (`score` vs `distance`), **3** (no namespace enumeration),
-      **10** (dashboard shows nothing), then 1, 5, 6, 7, 8 and the docs nits.
+- [x] **GitHub issues filed** — [#722](https://github.com/MystenLabs/MemWal/issues/722) (MCP collapses distinct blobs) and [#723](https://github.com/MystenLabs/MemWal/issues/723) (dashboard shows nothing), plus substantive measurement comments on [#695](https://github.com/MystenLabs/MemWal/issues/695#issuecomment-5367013737) and [#708](https://github.com/MystenLabs/MemWal/issues/708#issuecomment-5367014167). Two filed rather than ten, deliberately — see the duplicate audit in `memwal-feedback.md`.
+      Six of the ten drafts turned out to be already on the tracker — #373, #434/#395, #698 (×7),
+      #695/#708, #697 (×4), #715 — and a seventh idea, "MCP recall doesn't return blob_id", is #405.
+      Filing them would have meant a run of duplicate closures on a track judged for quality. If a
+      judge asks why this entry filed two issues instead of ten, the audit is the answer.
 - [ ] Joined [Walrus Discord](https://discord.com/invite/walrusprotocol)
 - [ ] Posted demo video / screenshot / link on X with **#Walrus** — link: `________`
 - [ ] Optional: Discord handle of referrer (worth 50% of prize to them, costs you nothing)
